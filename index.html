@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A simple habit tracker PWA to help you build better habits">
-    <meta name="theme-color" content="#4f46e5">
+    <meta name="theme-color" content="#475569">
     <title>Habit Tracker</title>
     
     <!-- PWA Manifest -->
@@ -13,13 +13,13 @@
     <!-- Icons (removed for testing) -->
     
     <!-- Styles -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
     <div class="app">
         <header class="header">
             <h1>Habit Tracker</h1>
-            <button id="addHabitBtn" class="add-btn">+</button>
+            <button id="addHabitBtn" class="add-btn">Add Habit</button>
         </header>
 
         <main class="main">
@@ -36,10 +36,6 @@
                     <div class="form-group">
                         <label for="habitName">Habit Name</label>
                         <input type="text" id="habitName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="habitDescription">Description (optional)</label>
-                        <textarea id="habitDescription"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="habitFrequency">Frequency</label>

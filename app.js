@@ -1,13 +1,13 @@
 class HabitTracker {
     constructor() {
-        this.habits = [];
+        this.habits = []; // create an empty array to store habits
         this.init();
     }
 
     init() {
-        this.loadHabits();
-        this.setupEventListeners();
-        this.renderHabits();
+        this.loadHabits(); // load habits from local storage
+        this.setupEventListeners(); // setup event listeners for the add habit button, modal, and form
+        this.renderHabits(); // render the habits to the DOM
     }
 
     setupEventListeners() {
@@ -41,19 +41,21 @@ class HabitTracker {
         });
     }
 
+    // show the modal to add a new habit
     showModal() {
         document.getElementById('addHabitModal').classList.add('show');
         document.getElementById('habitName').focus();
     }
 
+    // hide the modal to add a new habit
     hideModal() {
         document.getElementById('addHabitModal').classList.remove('show');
         document.getElementById('addHabitForm').reset();
     }
 
+    // add a new habit to the habits array
     addHabit() {
         const name = document.getElementById('habitName').value.trim();
-        const description = document.getElementById('habitDescription').value.trim();
         const frequency = document.getElementById('habitFrequency').value;
 
         if (!name) return;
@@ -61,7 +63,6 @@ class HabitTracker {
         const habit = {
             id: Date.now().toString(),
             name,
-            description,
             frequency,
             createdAt: new Date().toISOString(),
             completedDates: [],
@@ -210,33 +211,34 @@ class HabitTracker {
                     <div class="habit-header">
                         <div class="habit-info">
                             <h3>${this.escapeHtml(habit.name)}</h3>
-                            ${habit.description ? `<div class="habit-description">${this.escapeHtml(habit.description)}</div>` : ''}
                         </div>
                         <span class="habit-frequency">${habit.frequency}</span>
                     </div>
                     
                     <div class="habit-progress">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: ${progress.percentage}%"></div>
-                        </div>
                         <div class="progress-text">
                             <span>${progress.completed}/${progress.total} days</span>
-                            <span>${progress.percentage}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${progress.percentage}%">
+                                <span class="progress-percentage">${progress.percentage}%</span>
+                            </div>
                         </div>
                     </div>
                     
                     <div class="habit-stats">
-                        <small>Current streak: ${habit.streak} days | Longest: ${habit.longestStreak} days</small>
-                    </div>
-                    
-                    <div class="habit-actions">
-                        <button class="btn ${isCompletedToday ? 'btn-secondary' : 'btn-success'}" 
-                                onclick="habitTracker.toggleHabitCompletion('${habit.id}')">
-                            ${isCompletedToday ? '✓ Completed' : 'Mark Complete'}
-                        </button>
-                        <button class="btn btn-danger" onclick="habitTracker.deleteHabit('${habit.id}')">
-                            Delete
-                        </button>
+                        <div class="stats-row">
+                            <div class="habit-actions">
+                                <button class="btn btn-circular-small ${isCompletedToday ? 'btn-secondary' : 'btn-success'}" 
+                                        onclick="habitTracker.toggleHabitCompletion('${habit.id}')">
+                                    ${isCompletedToday ? '✓' : '+'}
+                                </button>
+                                <button class="btn btn-circular-small btn-danger" onclick="habitTracker.deleteHabit('${habit.id}')">
+                                    ×
+                                </button>
+                            </div>
+                            <small>Streak: ${habit.streak} | Longest: ${habit.longestStreak} </small>
+                        </div>
                     </div>
                 </div>
             `;
